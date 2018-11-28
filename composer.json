@@ -1,0 +1,27 @@
+{
+    "name": "earc/payload-container",
+    "description": "eArc - the explicit architecture framework - psr compatible payload container component",
+    "type": "library",
+    "license": "MIT",
+    "version": "0.0-ALPHA",
+    "authors": [
+        {
+            "name": "Thomas Koudela",
+            "email": "thomas@koudela.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
+    "require": {
+        "php": "^7.2",
+        "psr/container": "^1.0"
+    },
+    "autoload": {
+        "psr-4" : {
+            "eArc\\PayloadContainer\\" : "src"
+        }
+    },
+    "require-dev": {
+        "behat/behat": "^3.5"
+    }
+}
