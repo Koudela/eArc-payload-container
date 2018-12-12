@@ -11,6 +11,7 @@
 namespace eArc\PayloadContainer;
 
 use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
+use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
 
 /**
  * Basic item container.
@@ -36,6 +37,11 @@ class Items
      */
     public function set(string $name, $item): void
     {
+        if (isset($this->items[$name])) {
+            $this->items[$name] = $item;
+            throw new ItemOverwriteException("Item name `$name` is already used.");
+        }
+
         $this->items[$name] = $item;
     }
 

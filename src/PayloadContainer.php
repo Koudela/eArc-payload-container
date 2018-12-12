@@ -11,7 +11,7 @@
 namespace eArc\PayloadContainer;
 
 use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
-use eArc\PayloadContainer\Exceptions\PayloadOverwriteException;
+use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -35,16 +35,11 @@ class PayloadContainer implements ContainerInterface
      *
      * @param string $name
      * @param mixed  $item
-     * @param bool   $overwrite
      *
-     * @throws PayloadOverwriteException
+     * @throws ItemOverwriteException
      */
-    public function set(string $name, $item, $overwrite = false): void
+    public function set(string $name, $item): void
     {
-        if (!$overwrite && $this->items->has($name)) {
-            throw new PayloadOverwriteException("Item name `$name` is already used.");
-        }
-
         $this->items->set($name, $item);
     }
 
