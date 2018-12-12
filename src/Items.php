@@ -10,6 +10,8 @@
 
 namespace eArc\PayloadContainer;
 
+use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
+
 /**
  * Basic item container.
  */
@@ -32,7 +34,7 @@ class Items
      * @param string $name
      * @param mixed  $item
      */
-    public function set(string $name, $item)
+    public function set(string $name, $item): void
     {
         $this->items[$name] = $item;
     }
@@ -41,6 +43,7 @@ class Items
      * Check whether an item exists.
      *
      * @param string $name
+     *
      * @return bool
      */
     public function has(string $name): bool
@@ -52,10 +55,17 @@ class Items
      * Get an item.
      *
      * @param string $name
+     *
      * @return mixed
+     *
+     * @throws ItemNotFoundException
      */
     public function get(string $name)
     {
+        if (!isset($this->items)) {
+            throw new ItemNotFoundException();
+        }
+
         return $this->items[$name];
     }
 
@@ -64,7 +74,7 @@ class Items
      *
      * @param string $name
      */
-    public function remove(string $name)
+    public function remove(string $name): void
     {
         unset($this->items[$name]);
     }

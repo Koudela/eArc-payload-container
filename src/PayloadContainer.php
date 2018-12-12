@@ -36,6 +36,8 @@ class PayloadContainer implements ContainerInterface
      * @param string $name
      * @param mixed  $item
      * @param bool   $overwrite
+     *
+     * @throws PayloadOverwriteException
      */
     public function set(string $name, $item, $overwrite = false): void
     {
@@ -57,10 +59,6 @@ class PayloadContainer implements ContainerInterface
      */
     public function get($name)
     {
-        if (!$this->items->has($name)) {
-            throw new ItemNotFoundException();
-        }
-
         return $this->items->get($name);
     }
 
