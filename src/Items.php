@@ -22,9 +22,9 @@ class Items
     protected $items;
 
     /**
-     * @param Items|null $items
+     * @param array|null $items
      */
-    public function __construct(Items $items = null)
+    public function __construct(array $items = null)
     {
         $this->items = $items ?? [];
     }
