@@ -19,13 +19,13 @@ use Psr\Container\ContainerInterface;
  */
 class PayloadContainer implements ContainerInterface
 {
-    /** @var Items */
+    /** @var ItemsInterface */
     protected $items;
 
     /**
-     * @param Items|null $items
+     * @param ItemsInterface|null $items
      */
-    public function __construct(Items $items = null)
+    public function __construct(ItemsInterface $items = null)
     {
         $this->items = $items ?? new Items();
     }
@@ -60,7 +60,7 @@ class PayloadContainer implements ContainerInterface
     /**
      * Get the complete payload from the container.
      */
-    public function getItems(): Items
+    public function getItems(): ItemsInterface
     {
         return $this->items;
     }
@@ -89,9 +89,11 @@ class PayloadContainer implements ContainerInterface
 
     /**
      * Remove the old payload from the container.
+     *
+     * @param ItemsInterface|null $items
      */
-    public function reset(): void
+    public function reset(ItemsInterface $items = null): void
     {
-        $this->items = new Items();
+        $this->items = $items ?? new Items();
     }
 }
