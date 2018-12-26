@@ -16,7 +16,7 @@ use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
 /**
  * Basic item container.
  */
-class Items
+class Items implements ItemsInterface
 {
     /** @var array */
     protected $items;
