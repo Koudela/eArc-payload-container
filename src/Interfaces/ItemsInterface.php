@@ -8,11 +8,10 @@
  * @license http://opensource.org/licenses/MIT MIT License
  */
 
-namespace eArc\PayloadContainer;
+namespace eArc\PayloadContainer\Interfaces;
 
 use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
 use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
-use Psr\Container\ContainerInterface;
 
 /**
  * Basic item container interface.

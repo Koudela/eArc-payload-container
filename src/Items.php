@@ -12,6 +12,7 @@ namespace eArc\PayloadContainer;
 
 use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
 use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
+use eArc\PayloadContainer\Interfaces\ItemsInterface;
 
 /**
  * Basic item container.
