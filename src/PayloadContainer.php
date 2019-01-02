@@ -12,12 +12,14 @@ namespace eArc\PayloadContainer;
 
 use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
 use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
+use eArc\PayloadContainer\Exceptions\NotCallableException;
+use eArc\PayloadContainer\Interfaces\ItemsInterface;
 use Psr\Container\ContainerInterface;
 
 /**
  * Defines a psr compatible payload container.
  */
-class PayloadContainer implements ContainerInterface
+class PayloadContainer implements ContainerInterface, ItemsInterface
 {
     /** @var ItemsInterface */
     protected $items;
@@ -31,16 +33,15 @@ class PayloadContainer implements ContainerInterface
     }
 
     /**
-     * Add a specific item to the container.
+     * Checks whether a specific item exists.
      *
      * @param string $name
-     * @param mixed  $item
      *
-     * @throws ItemOverwriteException
+     * @return bool
      */
-    public function set(string $name, $item): void
+    public function has($name): bool
     {
-        $this->items->set($name, $item);
+        return $this->items->has($name);
     }
 
     /**
@@ -58,23 +59,45 @@ class PayloadContainer implements ContainerInterface
     }
 
     /**
-     * Get the complete payload from the container.
+     * Calls a specific closure item.
+     *
+     * @param string $name
+     * @param $arguments
+     *
+     * @return mixed
+     *
+     * @throws ItemNotFoundException
+     * @throws NotCallableException
      */
-    public function getItems(): ItemsInterface
+    public function call(string $name, $arguments)
     {
-        return $this->items;
+        return $this->items->call($name, $arguments);
     }
 
     /**
-     * Checks whether a specific item exists.
+     * Add a specific item to the container.
      *
      * @param string $name
+     * @param mixed  $item
      *
-     * @return bool
+     * @throws ItemOverwriteException
      */
-    public function has($name): bool
+    public function set(string $name, $item): void
     {
-        return $this->items->has($name);
+        $this->items->set($name, $item);
+    }
+
+    /**
+     * Overwrite a specific item of the container. Returns the old item.
+     *
+     * @param string $name
+     * @param $item
+     *
+     * @return mixed
+     */
+    public function overwrite(string $name, $item)
+    {
+        return $this->items->overwrite($name, $item);
     }
 
     /**
@@ -88,7 +111,15 @@ class PayloadContainer implements ContainerInterface
     }
 
     /**
-     * Remove the old payload from the container.
+     * Get the complete payload from the container.
+     */
+    public function getItems(): ItemsInterface
+    {
+        return $this->items;
+    }
+
+    /**
+     * Remove the old payload from the container or replace it.
      *
      * @param ItemsInterface|null $items
      */

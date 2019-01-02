@@ -13,6 +13,6 @@ namespace eArc\PayloadContainer\Exceptions;
 /**
  * Item of the payload container is overwritten unintentionally.
  */
-class ItemOverwriteException extends \RuntimeException
+class ItemOverwriteException extends ItemException
 {
 }

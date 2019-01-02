@@ -15,6 +15,6 @@ use Psr\Container\NotFoundExceptionInterface;
 /**
  * Item is not attached to the payload container.
  */
-class ItemNotFoundException extends \RuntimeException implements NotFoundExceptionInterface
+class ItemNotFoundException extends ItemException implements NotFoundExceptionInterface
 {
 }

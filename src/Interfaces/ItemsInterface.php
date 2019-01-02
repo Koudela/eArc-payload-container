@@ -12,22 +12,13 @@ namespace eArc\PayloadContainer\Interfaces;
 
 use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
 use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
+use eArc\PayloadContainer\Exceptions\NotCallableException;
 
 /**
  * Basic item container interface.
  */
 interface ItemsInterface
 {
-    /**
-     * Set an item.
-     *
-     * @param string $name
-     * @param mixed  $item
-     *
-     * @throws ItemOverwriteException
-     */
-    public function set(string $name, $item): void;
-
     /**
      * Check whether an item exists.
      *
@@ -47,6 +38,39 @@ interface ItemsInterface
      * @throws ItemNotFoundException
      */
     public function get(string $name);
+
+    /**
+     * Calls a closure item.
+     *
+     * @param string $name
+     * @param $arguments
+     *
+     * @return mixed
+     *
+     * @throws ItemNotFoundException
+     * @throws NotCallableException
+     */
+    public function call(string $name, $arguments);
+
+    /**
+     * Set an item.
+     *
+     * @param string $name
+     * @param mixed  $item
+     *
+     * @throws ItemOverwriteException
+     */
+    public function set(string $name, $item): void;
+
+    /**
+     * Overwrite an item. Returns the old item.
+     *
+     * @param string $name
+     * @param $item
+     *
+     * @return mixed
+     */
+    public function overwrite(string $name, $item);
 
     /**
      * Removes an item.
