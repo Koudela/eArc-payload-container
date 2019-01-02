@@ -119,12 +119,18 @@ class PayloadContainer implements ContainerInterface, ItemsInterface
     }
 
     /**
-     * Remove the old payload from the container or replace it.
+     * Remove the old payload from the container or replace it. Returns the old
+     * payload.
      *
      * @param ItemsInterface|null $items
+     *
+     * @return ItemsInterface
      */
-    public function reset(ItemsInterface $items = null): void
+    public function reset(ItemsInterface $items = null): ItemsInterface
     {
-        $this->items = $items ?? new Items();
+        $oldItems = $this->items;
+        $this->items = $items ?? new (get_class($oldItems))();
+
+        return $oldItems;
     }
 }
