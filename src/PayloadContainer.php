@@ -129,7 +129,8 @@ class PayloadContainer implements ContainerInterface, ItemsInterface
     public function reset(ItemsInterface $items = null): ItemsInterface
     {
         $oldItems = $this->items;
-        $this->items = $items ?? new (get_class($oldItems))();
+        $class = get_class($oldItems);
+        $this->items = $items ?? new $class();
 
         return $oldItems;
     }
