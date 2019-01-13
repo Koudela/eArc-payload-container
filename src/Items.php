@@ -12,13 +12,14 @@ namespace eArc\PayloadContainer;
 
 use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
 use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
-use eArc\PayloadContainer\Exceptions\NotCallableException;
+use eArc\PayloadContainer\Exceptions\ItemNotCallableException;
 use eArc\PayloadContainer\Interfaces\ItemsInterface;
+use Traversable;
 
 /**
  * Basic item container.
  */
-class Items implements ItemsInterface
+class Items implements ItemsInterface, \IteratorAggregate
 {
     /** @var array */
     protected $items;
@@ -70,7 +71,7 @@ class Items implements ItemsInterface
      * @return mixed
      *
      * @throws ItemNotFoundException
-     * @throws NotCallableException
+     * @throws ItemNotCallableException
      */
     public function call(string $name, $arguments)
     {
@@ -79,7 +80,7 @@ class Items implements ItemsInterface
         }
 
         if (!$this->items[$name] instanceof \Closure) {
-            throw new NotCallableException();
+            throw new ItemNotCallableException();
         }
 
         return ($this->items[$name])(...$arguments);
@@ -124,5 +125,15 @@ class Items implements ItemsInterface
     public function remove(string $name): void
     {
         unset($this->items[$name]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getIterator()
+    {
+        foreach ($this->items as $name => $item) {
+            yield $name => $item;
+        }
     }
 }

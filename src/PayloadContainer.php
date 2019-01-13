@@ -12,14 +12,15 @@ namespace eArc\PayloadContainer;
 
 use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
 use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
-use eArc\PayloadContainer\Exceptions\NotCallableException;
+use eArc\PayloadContainer\Exceptions\ItemNotCallableException;
 use eArc\PayloadContainer\Interfaces\ItemsInterface;
+use eArc\PayloadContainer\Interfaces\PayloadContainerInterface;
 use Psr\Container\ContainerInterface;
 
 /**
  * Defines a psr compatible payload container.
  */
-class PayloadContainer implements ContainerInterface, ItemsInterface
+class PayloadContainer implements ContainerInterface, PayloadContainerInterface, \IteratorAggregate
 {
     /** @var ItemsInterface */
     protected $items;
@@ -67,7 +68,7 @@ class PayloadContainer implements ContainerInterface, ItemsInterface
      * @return mixed
      *
      * @throws ItemNotFoundException
-     * @throws NotCallableException
+     * @throws ItemNotCallableException
      */
     public function call(string $name, $arguments)
     {
@@ -133,5 +134,13 @@ class PayloadContainer implements ContainerInterface, ItemsInterface
         $this->items = $items ?? new $class();
 
         return $oldItems;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getIterator()
+    {
+        return $this->items->getIterator();
     }
 }

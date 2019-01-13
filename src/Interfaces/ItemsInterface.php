@@ -12,7 +12,7 @@ namespace eArc\PayloadContainer\Interfaces;
 
 use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
 use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
-use eArc\PayloadContainer\Exceptions\NotCallableException;
+use eArc\PayloadContainer\Exceptions\ItemNotCallableException;
 
 /**
  * Basic item container interface.
@@ -48,7 +48,7 @@ interface ItemsInterface
      * @return mixed
      *
      * @throws ItemNotFoundException
-     * @throws NotCallableException
+     * @throws ItemNotCallableException
      */
     public function call(string $name, $arguments);
 
