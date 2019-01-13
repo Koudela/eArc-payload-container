@@ -94,7 +94,6 @@ class Items implements ItemsInterface
     public function set(string $name, $item): void
     {
         if (isset($this->items[$name])) {
-            $this->items[$name] = $item;
             throw new ItemOverwriteException("Item name `$name` is already used.");
         }
 
