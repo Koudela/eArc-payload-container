@@ -63,14 +63,14 @@ class PayloadContainer implements ContainerInterface, PayloadContainerInterface
      * Calls a specific closure item.
      *
      * @param string $name
-     * @param $arguments
+     * @param array  $arguments
      *
      * @return mixed
      *
      * @throws ItemNotFoundException
      * @throws ItemNotCallableException
      */
-    public function call(string $name, $arguments)
+    public function call(string $name, array $arguments = [])
     {
         return $this->items->call($name, $arguments);
     }

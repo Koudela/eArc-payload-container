@@ -45,10 +45,10 @@ class Items implements ItemsInterface
     public function get(string $name)
     {
         if (!isset($this->items[$name])) {
-            throw new ItemNotFoundException(
+            throw new ItemNotFoundException(sprintf(
                 'Item `%s` does not exist.',
                 $name
-            );
+            ));
         }
 
         return $this->items[$name];
@@ -60,17 +60,17 @@ class Items implements ItemsInterface
     public function call(string $name, array $arguments = [])
     {
         if (!isset($this->items[$name])) {
-            throw new ItemNotFoundException(
+            throw new ItemNotFoundException(sprintf(
                 'Item `%s` does not exist.',
                 $name
-            );
+            ));
         }
 
         if (!$this->items[$name] instanceof \Closure) {
-            throw new ItemNotCallableException(
+            throw new ItemNotCallableException(sprintf(
                 'Item value has to be of type Closure, but was of type `%s`.',
                 get_class($this->items[$name])
-            );
+            ));
         }
 
         return ($this->items[$name])(...$arguments);
