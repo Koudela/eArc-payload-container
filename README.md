@@ -121,14 +121,14 @@ or its implementation.
 
 ## exceptions
 
- * An `ItemNotCallableException` is thrown if the item is called but it is no 
+ * An `ItemNotCallableException` is thrown if an item is called that is no 
  instance of Closure.
 
- * An `ItemNotFoundException` is thrown if the item does not exist.
+ * An `ItemNotFoundException` is thrown if you get or call an item that does not 
+ exist.
 
- * An `ItemOverwriteException` is thrown if the item name is already set. If 
- it is by purpose you can catch the exception. The item is set before the
- exception gets thrown.
+ * An `ItemOverwriteException` is thrown if an item is set, but its name exists 
+ already. `overwrite` does not trigger this exception. 
  
  * All three exceptions inherit from the `ItemException`.
 
