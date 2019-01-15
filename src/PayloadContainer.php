@@ -20,7 +20,7 @@ use Psr\Container\ContainerInterface;
 /**
  * Defines a psr compatible payload container.
  */
-class PayloadContainer implements ContainerInterface, PayloadContainerInterface, \IteratorAggregate
+class PayloadContainer implements ContainerInterface, PayloadContainerInterface
 {
     /** @var ItemsInterface */
     protected $items;
@@ -112,7 +112,7 @@ class PayloadContainer implements ContainerInterface, PayloadContainerInterface,
     }
 
     /**
-     * Get the complete payload from the container.
+     * @inheritdoc
      */
     public function getItems(): ItemsInterface
     {
@@ -120,12 +120,7 @@ class PayloadContainer implements ContainerInterface, PayloadContainerInterface,
     }
 
     /**
-     * Remove the old payload from the container or replace it. Returns the old
-     * payload.
-     *
-     * @param ItemsInterface|null $items
-     *
-     * @return ItemsInterface
+     * @inheritdoc
      */
     public function reset(ItemsInterface $items = null): ItemsInterface
     {

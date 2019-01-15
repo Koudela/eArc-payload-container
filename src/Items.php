@@ -14,12 +14,11 @@ use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
 use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
 use eArc\PayloadContainer\Exceptions\ItemNotCallableException;
 use eArc\PayloadContainer\Interfaces\ItemsInterface;
-use Traversable;
 
 /**
  * Basic item container.
  */
-class Items implements ItemsInterface, \IteratorAggregate
+class Items implements ItemsInterface
 {
     /** @var array */
     protected $items;
@@ -33,11 +32,7 @@ class Items implements ItemsInterface, \IteratorAggregate
     }
 
     /**
-     * Check whether an item exists.
-     *
-     * @param string $name
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function has(string $name): bool
     {
@@ -45,69 +40,59 @@ class Items implements ItemsInterface, \IteratorAggregate
     }
 
     /**
-     * Get an item.
-     *
-     * @param string $name
-     *
-     * @return mixed
-     *
-     * @throws ItemNotFoundException
+     * @inheritdoc
      */
     public function get(string $name)
     {
         if (!isset($this->items[$name])) {
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException(
+                'Item `%s` does not exist.',
+                $name
+            );
         }
 
         return $this->items[$name];
     }
 
     /**
-     * Calls an closure item.
-     *
-     * @param string $name
-     * @param $arguments
-     *
-     * @return mixed
-     *
-     * @throws ItemNotFoundException
-     * @throws ItemNotCallableException
+     * @inheritdoc
      */
-    public function call(string $name, $arguments)
+    public function call(string $name, array $arguments = [])
     {
         if (!isset($this->items[$name])) {
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException(
+                'Item `%s` does not exist.',
+                $name
+            );
         }
 
         if (!$this->items[$name] instanceof \Closure) {
-            throw new ItemNotCallableException();
+            throw new ItemNotCallableException(
+                'Item value has to be of type Closure, but was of type `%s`.',
+                get_class($this->items[$name])
+            );
         }
 
         return ($this->items[$name])(...$arguments);
     }
 
     /**
-     * Set an item.
-     *
-     * @param string $name
-     * @param mixed  $item
+     * @inheritdoc
      */
     public function set(string $name, $item): void
     {
         if (isset($this->items[$name])) {
-            throw new ItemOverwriteException("Item name `$name` is already used.");
+            throw new ItemOverwriteException(sprintf(
+                'Item name `%s` is already used.',
+                $name
+            ));
         }
 
         $this->items[$name] = $item;
     }
 
     /**
-     * Overwrite an item. Returns the old item.
-     *
-     * @param string $name
-     * @param $item
-     *
-     * @return mixed
+     * @inheritdoc
      */
     public function overwrite(string $name, $item)
     {
@@ -118,9 +103,7 @@ class Items implements ItemsInterface, \IteratorAggregate
     }
 
     /**
-     * Removes an item.
-     *
-     * @param string $name
+     * @inheritdoc
      */
     public function remove(string $name): void
     {

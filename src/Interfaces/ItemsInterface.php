@@ -17,7 +17,7 @@ use eArc\PayloadContainer\Exceptions\ItemNotCallableException;
 /**
  * Basic item container interface.
  */
-interface ItemsInterface
+interface ItemsInterface extends \IteratorAggregate
 {
     /**
      * Check whether an item exists.
@@ -43,14 +43,14 @@ interface ItemsInterface
      * Calls a closure item.
      *
      * @param string $name
-     * @param $arguments
+     * @param array  $arguments
      *
      * @return mixed
      *
      * @throws ItemNotFoundException
      * @throws ItemNotCallableException
      */
-    public function call(string $name, $arguments);
+    public function call(string $name, array $arguments = []);
 
     /**
      * Set an item.

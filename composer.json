@@ -18,7 +18,8 @@
     },
     "autoload": {
         "psr-4" : {
-            "eArc\\PayloadContainer\\" : "src"
+            "eArc\\PayloadContainer\\": "src",
+            "eArc\\PayloadContainerTests\\": "tests"
         }
     },
     "require-dev": {
