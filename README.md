@@ -9,6 +9,15 @@ every project of medium complexity you need a bag or carrier class. There is no
 point in reinventing the wheel again and again. Just use the 
 earc/payload-container or parts of it.
 
+## table of contents
+ 
+ - [installation](#installation)
+ - [basic usage item container](#basic-usage-item-container)
+ - [basic usage payload container](#basic-usage-payload-container)
+ - [exceptions](#exceptions)
+ - [advanced usage](#advanced-usage)
+ - [releases](#releases)
+
 ## installation
 
 ```
@@ -61,7 +70,7 @@ For details refer to the
 [ItemsInterface](https://github.com/Koudela/eArc-payload-container/blob/master/src/Interfaces/ItemsInterface.php) 
 or its implementation.
 
-### Basic usage of the payload Container
+## basic usage payload container
 
 The payload container carries one items object. The `PayloadContainerInterface` 
 extends the `ItemsInterface` thus all things you can do with the
@@ -126,7 +135,7 @@ or its implementation.
 ## advanced usage
 
 Implement the `ItemInterface` or the `PayloadContainerInterface` on your own.
-eArc encourages the use of Interfaces. In all eArc components using the 
+eArc encourages the use of interfaces. In all eArc components using the 
 [earc/components-di](https://github.com/Koudela/eArc-component-di) component 
 for dependency injection you can replace the classes used for the interfaces as 
 easy as writing your own name. Yes, even in the earc component itself.
