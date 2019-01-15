@@ -57,8 +57,9 @@ foreach($itemBag as $name => $item) {
 }
 ```
 
-For details refer to the `ItemsInterface` respectively 
-`src/Interfaces/ItemsInterface.php` or its implementation.
+For details refer to the 
+[ItemsInterface](https://github.com/Koudela/eArc-payload-container/blob/master/src/Interfaces/ItemsInterface.php) 
+or its implementation.
 
 ### Basic usage of the payload Container
 
@@ -105,8 +106,9 @@ $oldItems = $carrier->reset($items)
 $consumer->getItems($carrier->getItems());
 ```
 
-For details refer to the `PayloadContainerInterface` respectively 
-`src/Interfaces/PayloadContainerInterface.php` or its implementation.
+For details refer to the 
+[PayloadContainerInterface](https://github.com/Koudela/eArc-payload-container/blob/master/src/Interfaces/PayloadContainerInterface.php) 
+or its implementation.
 
 ## exceptions
 
