@@ -1,6 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * e-Arc Framework - the explicit Architecture Framework
+ * psr-11 compatible container carrier
  *
  * @package earc/payload-container
  * @link https://github.com/Koudela/eArc-payload-container/
@@ -10,12 +11,14 @@
 
 namespace eArc\PayloadContainer;
 
-use eArc\PayloadContainer\Exceptions\ItemNotFoundException;
-use eArc\PayloadContainer\Exceptions\ItemOverwriteException;
-use eArc\PayloadContainer\Exceptions\ItemNotCallableException;
-use eArc\PayloadContainer\Interfaces\ItemsInterface;
+use eArc\Container\Exceptions\ItemNotFoundException;
+use eArc\Container\Exceptions\ItemOverwriteException;
+use eArc\Container\Exceptions\ItemNotCallableException;
+use eArc\Container\Interfaces\ItemsInterface;
+use eArc\Container\Items;
 use eArc\PayloadContainer\Interfaces\PayloadContainerInterface;
 use Psr\Container\ContainerInterface;
+use \Throwable;
 
 /**
  * Defines a psr compatible payload container.
@@ -34,7 +37,7 @@ class PayloadContainer implements ContainerInterface, PayloadContainerInterface
     }
 
     /**
-     * Checks whether a specific item exists.
+     * Check whether a specific item exists.
      *
      * @param string $name
      *
@@ -60,7 +63,7 @@ class PayloadContainer implements ContainerInterface, PayloadContainerInterface
     }
 
     /**
-     * Calls a specific closure item.
+     * Call a specific item.
      *
      * @param string $name
      * @param array  $arguments
@@ -122,13 +125,29 @@ class PayloadContainer implements ContainerInterface, PayloadContainerInterface
     /**
      * @inheritdoc
      */
-    public function reset(ItemsInterface $items = null): ItemsInterface
+    public function resetItems(ItemsInterface $items = null): ItemsInterface
     {
         $oldItems = $this->items;
-        $class = get_class($oldItems);
-        $this->items = $items ?? new $class();
+
+        $this->items = $items ?? $this->getNewItemsInstance();
 
         return $oldItems;
+    }
+
+    /**
+     * Get a new items instance.
+     *
+     * @return mixed
+     */
+    protected function getNewItemsInstance()
+    {
+        $class = get_class($this->items);
+
+        try {
+            return new $class();
+        } catch (Throwable $e) {
+            return clone $this->items;
+        }
     }
 
     /**

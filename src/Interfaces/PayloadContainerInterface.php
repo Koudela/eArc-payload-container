@@ -1,6 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * e-Arc Framework - the explicit Architecture Framework
+ * psr-11 compatible container carrier
  *
  * @package earc/payload-container
  * @link https://github.com/Koudela/eArc-payload-container/
@@ -9,6 +10,8 @@
  */
 
 namespace eArc\PayloadContainer\Interfaces;
+
+use eArc\Container\Interfaces\ItemsInterface;
 
 /**
  * Payload container interface.
@@ -28,5 +31,5 @@ interface PayloadContainerInterface extends ItemsInterface
      *
      * @return ItemsInterface
      */
-    public function reset(ItemsInterface $items = null): ItemsInterface;
+    public function resetItems(ItemsInterface $items = null): ItemsInterface;
 }
