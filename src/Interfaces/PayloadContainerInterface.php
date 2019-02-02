@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 /**
  * e-Arc Framework - the explicit Architecture Framework
- * psr-11 compatible container carrier
+ * psr-11 compatible container carrier blueprint
  *
  * @package earc/payload-container
  * @link https://github.com/Koudela/eArc-payload-container/

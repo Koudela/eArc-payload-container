@@ -1,6 +1,7 @@
 # earc/payload-container
 
-Basic [psr-11](https://www.php-fig.org/psr/psr-11/) compatible container carrier.
+Basic [psr-11](https://www.php-fig.org/psr/psr-11/) compatible container carrier
+blueprint.
 
 This eArc component is brought to you as a standalone component mainly for 
 reusage reasons. There is nothing special or ground breaking to it. In nearly
