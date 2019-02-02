@@ -30,7 +30,7 @@ trait PayloadContainerTrait
     /**
      * @param ItemsInterface|null $items
      */
-    public function initPayloadContainerTrait(ItemsInterface $items = null)
+    protected function initPayloadContainerTrait(ItemsInterface $items = null)
     {
         $this->payloadContainerItems = $items ?? new Items();
     }
