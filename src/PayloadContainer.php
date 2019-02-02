@@ -18,10 +18,10 @@ use eArc\Container\Interfaces\ItemsInterface;
 use eArc\Container\Items;
 use eArc\PayloadContainer\Interfaces\PayloadContainerInterface;
 use Psr\Container\ContainerInterface;
-use \Throwable;
+use Throwable;
 
 /**
- * Defines a psr compatible payload container.
+ * Defines a psr-11 compatible payload container.
  */
 class PayloadContainer implements ContainerInterface, PayloadContainerInterface
 {
