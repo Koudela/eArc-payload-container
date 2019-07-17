@@ -3,7 +3,7 @@
     "description": "eArc - the explicit architecture framework - psr-11 compatible container carrier blueprint",
     "type": "library",
     "license": "MIT",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "authors": [
         {
             "name": "Thomas Koudela",
@@ -15,7 +15,7 @@
     "require": {
         "php": "^7.2",
         "psr/container": "^1.0",
-        "earc/container": "dev-master"
+        "earc/container": "^0.1"
     },
     "autoload": {
         "psr-4" : {
